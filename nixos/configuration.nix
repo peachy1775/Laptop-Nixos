@@ -33,12 +33,14 @@
   services = {
     qemuGuest.enable = true;
     spice-vdagentd.enable = true;
-    xserver = {
+        displayManager.sddm = {
       enable = true;
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
+      theme = "catppuccin-mocha";
+      package = pkgs.kdePackages.sddm;
+      autoLogin.user = "peaches";
+    };
+        xserver = {
+      enable = true;
       videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";
@@ -67,18 +69,18 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment.sessionVariables = {
-    GDK_SCALE = "1";
-    GDK_DPI_SCALE = "1.5";
-    QT_SCALE_FACTOR = "1.5";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    XCURSOR_SIZE = "48";
-    WLR_DPI = "192";
-    GTK_USE_PORTAL = "1";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-  };
+ environment.sessionVariables = {
+  GDK_SCALE = "1";
+  GDK_DPI_SCALE = "1";
+  QT_SCALE_FACTOR = "1";
+  #QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+  XCURSOR_SIZE = "36";
+  #WLR_DPI = "192";
+  GTK_USE_PORTAL = "1";
+  XDG_CURRENT_DESKTOP = "Hyprland";
+  XDG_SESSION_DESKTOP = "Hyprland";
+  XDG_SESSION_TYPE = "wayland";
+};
 
   environment.etc."hosts".text = lib.mkForce ''
     127.0.0.1 localhost
@@ -177,6 +179,16 @@
       clinfo
     ];
   };
+
+  environment.systemPackages = [
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      font = "Noto Sans";
+      fontSize = "16";
+      background = "${../home/config/.wallpapers/anom.jpg}";
+      loginBackground = true;
+    })
+  ];  
 
   fonts = {
     packages = with pkgs; [

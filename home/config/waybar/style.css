@@ -1,98 +1,50 @@
-* {
+*  {
     border: none;
     font-family: "Hack", "Font Awesome 6 Pro";
-    font-size: 15px;
-    font-weight: 400;
-    background: none;
+    font-size: 13px;
+    color: #55b6a6;
+    border-radius: 20px;
 }
 
 window#waybar {
-    color: #a5adcb;
+    background: rgba(2, 141, 106, 0);
 }
-
-.modules-left,
-.modules-right,
+/*-----module groups----*/
+.modules-right {
+	background-color: transparent;
+    margin: 2px 10px 0 0;
+}
 .modules-center {
-    border-radius: 6px;
-    background: #2c0e58;
-    padding: 12px 0;
+	background-color: transparent;
+    margin: 2px 10px 0 0;
+}
+.modules-left {
+    margin: 2px 0 0 5px;
+	background-color: transparent;
+}
+/*-----modules indv----*/
+#workspaces button {
+    padding: 1px 5px;
+    background-color: transparent;
+}
+#workspaces button:hover {
+    box-shadow: inherit;
+	background-color: rgba(0,153,153,1);
 }
 
-tooltip {
-    color: #a5adcb;
-    background-color: #2c2f57;
-    text-shadow: none;
-}
-
-tooltip * {
-    color: #a5adcb;
-    text-shadow: none;
-}
-
-.modules-center {}
-
-#custom-sep {
-    color: #cc30da;
-    margin: 4px 0;
-}
-
-#battery,
+/*
 #workspaces,
 #clock,
-#custom-bluetooth_devices,
-#custom-powermenu,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#network,
 #pulseaudio,
-#tray {}
-
-#workspaces {
-    border-radius: 6px;
-}
-
-#workspaces button {
-    color: #5aa4dd;
-    background: none;
-    padding: 0;
-}
-
-#workspaces button:hover {
-    color: #a6da95;
-}
-
-#workspaces button.active {
-    font-weight: 600;
-    color: #f5bde6;
-}
-
-#battery {
-    color: #099923;
-}
-
-#temperature {
-    color: #eed49f;
-}
-
-#clock {
-    font-weight: 600;
-    color: #8bd5ca;
-}
-
-#bluetooth {
-    color: #8aadf4;
-}
-
-#pulseaudio {
-    color: #a6da95;
-}
-
+#custom-media,
+#tray,
+#mode,
+#custom-power,
+#custom-menu,
 #pulseaudio.muted {
-    color: #ed8796;
-}
-
-#memory {
-    color: #ed8796;
-}
-
-#custom-powermenu {
-    margin: 12px 0 0 0;
-    color: #6e738d;
-}
+}*/

@@ -3,7 +3,7 @@ _: {
     enable = true;
 
     settings = {
-      monitor = "eDP-1,preferred,auto,2";
+      monitor = "eDP-1,2560x1600@240.00Hz,auto,2";
 
       # Auto-launing
       exec-once = [
