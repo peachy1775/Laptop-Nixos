@@ -33,6 +33,10 @@ alias clear = do {
   ^clear
   screenfetch
 }
+def ff [] {
+  let selected = (fzf | into string | str trim)
+  code $selected
+}
 export def dev [] {
   nix develop --command nu
 }

@@ -8,7 +8,7 @@
   "modules-right": [
     "bluetooth",
     "custom/sep",
-    "temperature",
+    "battery",
     "custom/sep",
     "pulseaudio",
     "custom/sep",
@@ -22,6 +22,16 @@
     "format": "",
     "tooltip": false
   },
+ "battery": {
+  "bat": "BAT0",
+  "interval": 60,
+  "rotate": 90,
+  "states": {
+    "warning": 30,
+    "critical": 15
+  },
+  "format": "{capacity}%"
+},
   "bluetooth": {
     "format": "",
     "justify": "center",

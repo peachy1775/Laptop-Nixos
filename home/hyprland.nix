@@ -3,7 +3,7 @@ _: {
     enable = true;
 
     settings = {
-      monitor = "DP-4,preferred,auto,2";
+      monitor = "eDP-1,preferred,auto,2";
 
       # Auto-launing
       exec-once = [
@@ -19,8 +19,6 @@ _: {
       general = {
         gaps_in = 0;
         gaps_out = 0;
-        #"col.active_border" = "rgb(7800e3) rgb(c452e0) 45deg";
-        #"col.inactive_border" = "rgba(00000000)";
       };
 
       decoration = {
@@ -41,9 +39,10 @@ _: {
       input = {
         kb_layout = "us";
         follow_mouse = 1;
-        sensitivity = 0.5;
+        sensitivity = 0.0;
         touchpad = {
-          natural_scroll = true;
+          natural_scroll = false;
+          scroll_factor = 0.2;
         };
       };
 
@@ -75,20 +74,20 @@ _: {
         "SUPER ALT SHIFT, Q, exit"
         "SUPER LSHIFT, Space, togglefloating"
         "ALT, Return, fullscreen"
-        "SUPER, 1, workspace, 1"
-        "SUPER SHIFT, 1, movetoworkspace, 1"
-        "SUPER, 2, workspace, 2"
-        "SUPER SHIFT, 2, movetoworkspace, 2"
-        "SUPER, 3, workspace, 3"
-        "SUPER SHIFT, 3, movetoworkspace, 3"
-        "SUPER, 4, workspace, 4"
-        "SUPER SHIFT, 4, movetoworkspace, 4"
-        "SUPER, 5, workspace, 5"
-        "SUPER SHIFT, 5, movetoworkspace, 5"
-        "SUPER, 6, workspace, 6"
-        "SUPER SHIFT, 6, movetoworkspace, 6"
-        "SUPER, 7, workspace, 7"
-        "SUPER SHIFT, 7, movetoworkspace, 7"
+        "SUPER, grave, workspace, 1"
+        "SUPER SHIFT, `, movetoworkspace, 1"
+        "SUPER, 1, workspace, 2"
+        "SUPER SHIFT, 1, movetoworkspace, 2"
+        "SUPER, 2, workspace, 3"
+        "SUPER SHIFT, 2, movetoworkspace, 3"
+        "SUPER, 3, workspace, 4"
+        "SUPER SHIFT, 3, movetoworkspace, 4"
+        "SUPER, 4, workspace, 5"
+        "SUPER SHIFT, 4, movetoworkspace, 5"
+        "SUPER, 5, workspace, 6"
+        "SUPER SHIFT, 5, movetoworkspace, 6"
+        "SUPER, 6, workspace, 7"
+        "SUPER SHIFT, 6, movetoworkspace, 7"
         "SUPER, mouse_up, workspace, e+1"
         "SUPER, mouse_down, workspace, e-1"
         ", XF86AudioRaiseVolume, exec, vol --up"
@@ -97,6 +96,8 @@ _: {
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
+        "SUPER, MINUS, exec, brightnessctl set 10%-"
+        "SUPER, EQUAL, exec, brightnessctl set 10%+"
       ];
       bindl = [
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"

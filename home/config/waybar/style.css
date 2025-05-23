@@ -14,7 +14,7 @@ window#waybar {
 .modules-right,
 .modules-center {
     border-radius: 6px;
-    background: #3a3a63;
+    background: #2c0e58;
     padding: 12px 0;
 }
 
@@ -36,6 +36,7 @@ tooltip * {
     margin: 4px 0;
 }
 
+#battery,
 #workspaces,
 #clock,
 #custom-bluetooth_devices,
@@ -60,6 +61,10 @@ tooltip * {
 #workspaces button.active {
     font-weight: 600;
     color: #f5bde6;
+}
+
+#battery {
+    color: #099923;
 }
 
 #temperature {

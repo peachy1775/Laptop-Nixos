@@ -17,7 +17,10 @@
   ];
 
   boot = {
+    kernelModules = [ "lenovo-legion" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    initrd.kernelModules = [ "nvidia" ];
+    blacklistedKernelModules = [ "nouveau" ];
     loader = {
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 5;
@@ -36,7 +39,7 @@
         enable = true;
         wayland = true;
       };
-      videoDrivers = [ "intel" ];
+      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";
         options = "eurosign:e,caps:escape";
@@ -44,8 +47,16 @@
     };
   };
 
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false; # Use proprietary driver
+    nvidiaSettings = true;
+    package = pkgs.linuxKernel.packages.linux_6_12.nvidiaPackages.stable;
+  };
+
   networking = {
-    hostName = "peaches";
+    hostName = "peachy";
     networkmanager.enable = true;
   };
 
@@ -56,20 +67,19 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  environment = {
-    variables = {
-      GDK_SCALE = "1";
-      GDK_DPI_SCALE = "1.5";
-      QT_SCALE_FACTOR = "1.5";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      XCURSOR_SIZE = "48";
-      WLR_DPI = "192";
-      GTK_USE_PORTAL = "1";
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-    };
+  environment.sessionVariables = {
+    GDK_SCALE = "1";
+    GDK_DPI_SCALE = "1.5";
+    QT_SCALE_FACTOR = "1.5";
+    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    XCURSOR_SIZE = "48";
+    WLR_DPI = "192";
+    GTK_USE_PORTAL = "1";
+    XDG_CURRENT_DESKTOP = "Hyprland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    XDG_SESSION_TYPE = "wayland";
   };
+
   environment.etc."hosts".text = lib.mkForce ''
     127.0.0.1 localhost
     ::1 localhost
@@ -125,14 +135,17 @@
   # VIRT
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    jack.enable = false;
   };
+
+  users.groups.libvirt = { };
 
   users.users.peaches = {
     isNormalUser = true;
@@ -141,6 +154,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "storage"
+      "libvirt"
     ];
     packages = with pkgs; [
       hyprland
@@ -151,7 +166,15 @@
       wayland
       wireplumber
       xdg-desktop-portal-hyprland
-
+      gvfs
+      usbutils
+      udiskie
+      udisks
+      xfce.thunar-volman
+      polkit_gnome
+      ntfs3g
+      ocl-icd
+      clinfo
     ];
   };
 
@@ -170,5 +193,15 @@
 
   programs.hyprland.enable = true;
 
+  services.libinput.enable = true;
+
+  services.libinput.touchpad = {
+    naturalScrolling = false;
+    scrollMethod = "twofinger";
+    accelSpeed = "-1.0"; # Slows down scrolling
+    accelProfile = "adaptive";
+  };
+
   system.stateVersion = "24.11";
+
 }

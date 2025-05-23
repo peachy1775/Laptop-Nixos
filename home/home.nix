@@ -22,8 +22,11 @@
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
       GTK_USE_PORTAL = "1";
+      WLR_NO_HARDWARE_CURSORS = "2";
+      XCURSOR_THEME = "Adwaita";
+
     };
- 
+
     file = {
       ".config/ghostty" = {
         source = ./config/ghostty;
@@ -98,6 +101,9 @@
       bb
       bat
       xfce.tumbler
+      networkmanager
+      adwaita-icon-theme
+
     ];
   };
 
@@ -146,19 +152,12 @@
           betterSettings.enable = true;
           callTimer.enable = true;
           crashHandler.enable = true;
-          fixSpotifyEmbeds = {
-            enable = true;
-            volume = 9.0;
-          };
           fixYoutubeEmbeds.enable = true;
           imageZoom.enable = true;
           noF1.enable = true;
           onePingPerDM.enable = true;
           openInApp.enable = true;
           quickReply.enable = true;
-          spotifyControls.enable = true;
-          spotifyCrack.enable = true;
-          spotifyShareCommands.enable = true;
           voiceChatDoubleClick.enable = true;
           voiceDownload.enable = true;
           voiceMessages.enable = true;
@@ -167,7 +166,6 @@
             multiplier = 5;
           };
           webKeybinds.enable = true;
-          webRichPresence.enable = true;
           webScreenShareFixes.enable = true;
           youtubeAdblock.enable = true;
         };
