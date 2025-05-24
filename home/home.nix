@@ -11,20 +11,18 @@
 
   home = {
     inherit username;
-    homeDirectory = "/home/peaches";
+    homeDirectory = "/home/${username}";
     stateVersion = "24.11";
 
     sessionVariables = {
       EDITOR = "vscode";
       GIT_EDITOR = "vscode";
-
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
       GTK_USE_PORTAL = "1";
       WLR_NO_HARDWARE_CURSORS = "2";
       XCURSOR_THEME = "Adwaita";
-
     };
 
     file = {
@@ -32,18 +30,10 @@
         source = ./config/ghostty;
         recursive = true;
       };
-      ".config/starship.toml" = {
-        source = ./config/starship.toml;
-      };
-      ".config/fastfetch/nixos.png" = {
-        source = ./config/fastfetch/nixos.png;
-      };
-      ".config/waybar/config.jsonc" = {
-        source = ./config/waybar/config.json;
-      };
-      ".config/waybar/style.css" = {
-        source = ./config/waybar/style.css;
-      };
+      ".config/starship.toml".source = ./config/starship.toml;
+      ".config/fastfetch/nixos.png".source = ./config/fastfetch/nixos.png;
+      ".config/waybar/config.jsonc".source = ./config/waybar/config.json;
+      ".config/waybar/style.css".source = ./config/waybar/style.css;
     };
 
     packages = with pkgs; [
@@ -103,12 +93,27 @@
       xfce.tumbler
       networkmanager
       adwaita-icon-theme
-
     ];
   };
 
-  programs = {
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      monitor = ",preferred,auto,1";
+      exec-once = [
+        "waybar"
+        "swww init && swww img ~/Pictures/wallpaper.jpg"
+        "dunst"
+      ];
+      input.kb_layout = "us";
+      general = {
+        gaps_in = 5;
+        gaps_out = 20;
+      };
+    };
+  };
 
+  programs = {
     git = {
       enable = true;
       userName = "Dont_Matta";
@@ -172,11 +177,9 @@
       };
     };
   };
-  # Optional: improve build speed from user-level (limited)
-  nixpkgs = {
-    config = {
-      max-jobs = "auto";
-      cores = 0;
-    };
+
+  nixpkgs.config = {
+    max-jobs = "auto";
+    cores = 0;
   };
 }
