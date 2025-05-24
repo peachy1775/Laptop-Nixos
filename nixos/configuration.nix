@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -9,52 +9,20 @@
   nix.settings = {
     max-jobs = "auto";
     cores = 0;
+    experimental-features = [ "nix-command" "flakes" ];
   };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   boot = {
-    kernelModules = [ "lenovo-legion" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    kernelModules = [ "lenovo-legion" ];
     initrd.kernelModules = [ "nvidia" ];
     blacklistedKernelModules = [ "nouveau" ];
+
     loader = {
       systemd-boot.enable = true;
-      systemd-boot.configurationLimit = 5;
       efi.canTouchEfiVariables = true;
+      systemd-boot.configurationLimit = 5;
     };
-  };
-
-  security.polkit.enable = true;
-
-  services = {
-    qemuGuest.enable = true;
-    spice-vdagentd.enable = true;
-        displayManager.sddm = {
-      enable = true;
-      theme = "catppuccin-mocha";
-      package = pkgs.kdePackages.sddm;
-      autoLogin.user = "peaches";
-    };
-        xserver = {
-      enable = true;
-      videoDrivers = [ "nvidia" ];
-      xkb = {
-        layout = "us";
-        options = "eurosign:e,caps:escape";
-      };
-    };
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false; # Use proprietary driver
-    nvidiaSettings = true;
-    package = pkgs.linuxKernel.packages.linux_6_12.nvidiaPackages.stable;
   };
 
   networking = {
@@ -63,124 +31,22 @@
   };
 
   time.timeZone = "America/Chicago";
-
   i18n.defaultLocale = "en_US.UTF-8";
-  services.getty.autologinUser = "peaches";
-
-  nixpkgs.config.allowUnfree = true;
-
- environment.sessionVariables = {
-  GDK_SCALE = "1";
-  GDK_DPI_SCALE = "1";
-  QT_SCALE_FACTOR = "1";
-  #QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-  XCURSOR_SIZE = "36";
-  #WLR_DPI = "192";
-  GTK_USE_PORTAL = "1";
-  XDG_CURRENT_DESKTOP = "Hyprland";
-  XDG_SESSION_DESKTOP = "Hyprland";
-  XDG_SESSION_TYPE = "wayland";
-};
-
-  environment.etc."hosts".text = lib.mkForce ''
-    127.0.0.1 localhost
-    ::1 localhost
-    127.0.0.2 peaches
-    # VS Code core telemetry and update services
-    0.0.0.0 az764295.vo.msecnd.net
-    0.0.0.0 vscode-sync.trafficmanager.net
-    0.0.0.0 vscode-update.azurewebsites.net
-    0.0.0.0 vscode.azureedge.net
-    0.0.0.0 marketplace.visualstudio.com
-    0.0.0.0 vscode.market.visualstudio.com
-    0.0.0.0 default.exp-tas.com
-    0.0.0.0 dc.services.visualstudio.com
-    0.0.0.0 telemetry.visualstudio.com
-    0.0.0.0 settings-prod.api.visualstudio.com
-    0.0.0.0 msedge.api.cdp.microsoft.com
-    0.0.0.0 az416426.vo.msecnd.net
-    0.0.0.0 vortex.data.microsoft.com
-    0.0.0.0 go.microsoft.com
-    0.0.0.0 errors.edge.microsoft.com
-
-    # Authentication and Microsoft account login
-    #0.0.0.0 login.microsoftonline.com
-    #0.0.0.0 login.live.com
-    #0.0.0.0 aadcdn.msauth.net
-    #0.0.0.0 aadcdn.msftauth.net
-
-    # Extension gallery and assets
-    0.0.0.0 gallerycdn.vsassets.io
-    0.0.0.0 msassets.visualstudio.com
-
-    # Optional - wildcard block (note: /etc/hosts doesn't support wildcards)
-    # Use Pi-hole or custom DNS for these
-    # *.events.data.microsoft.com  
-  '';
-
-  # BLUETOOTH #
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-  services.pulseaudio.enable = false;
-
-  # input and display
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    config.common.default = "*"; # optional but useful
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
-    ];
-  };
-
-  # VIRT
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = false;
-  };
-
-  users.groups.libvirt = { };
 
   users.users.peaches = {
     isNormalUser = true;
     description = "peaches";
     shell = pkgs.nushell;
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "storage"
-      "libvirt"
-    ];
-    packages = with pkgs; [
-      hyprland
-      pipewire
-      pulseaudio
-      qemu
-      virt-manager
-      wayland
-      wireplumber
-      xdg-desktop-portal-hyprland
-      gvfs
-      usbutils
-      udiskie
-      udisks
-      xfce.thunar-volman
-      polkit_gnome
-      ntfs3g
-      ocl-icd
-      clinfo
-    ];
+    extraGroups = [ "wheel" "networkmanager" "libvirt" "storage" ];
   };
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
+    hyprland
+    xwayland
+    wl-clipboard
+    rofi-wayland
+    foot
+    wayland-utils
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       font = "Noto Sans";
@@ -188,7 +54,17 @@
       background = "${../home/config/.wallpapers/anom.jpg}";
       loginBackground = true;
     })
-  ];  
+  ];
+
+  # Required for SDDM to see Hyprland
+  environment.etc."xdg/wayland-sessions/Hyprland.desktop".text = ''
+    [Desktop Entry]
+    Name=Hyprland
+    Comment=Hyprland Wayland Compositor
+    Exec=Hyprland
+    Type=Application
+    DesktopNames=Hyprland
+  '';
 
   fonts = {
     packages = with pkgs; [
@@ -203,17 +79,77 @@
     fontconfig.defaultFonts.monospace = [ "JetBrainsMono" ];
   };
 
-  programs.hyprland.enable = true;
+  services = {
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      xkb.layout = "us";
+      xkb.options = "eurosign:e,caps:escape";
+    };
 
-  services.libinput.enable = true;
+    displayManager.sddm = {
+      enable = true;
+      autoLogin.user = "peaches";
+      package = pkgs.kdePackages.sddm;
+      theme = "catppuccin-mocha";
+    };
 
-  services.libinput.touchpad = {
-    naturalScrolling = false;
-    scrollMethod = "twofinger";
-    accelSpeed = "-1.0"; # Slows down scrolling
-    accelProfile = "adaptive";
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = false;
+    };
+
+    libinput = {
+      enable = true;
+      touchpad = {
+        naturalScrolling = false;
+        scrollMethod = "twofinger";
+        accelSpeed = "-1.0";
+        accelProfile = "adaptive";
+      };
+    };
+
+    bluetooth.enable = true;
+    blueman.enable = true;
+    polkit.enable = true;
+
+    qemuGuest.enable = true;
+    spice-vdagentd.enable = true;
+    getty.autologinUser = "peaches";
+
+    udisks2.enable = true;
+
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
+      config.common.default = "*";
+    };
   };
 
-  system.stateVersion = "24.11";
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
+
+  programs.dconf.enable = true;
+  programs.hyprland.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
+
+  system.stateVersion = "24.11";
 }
