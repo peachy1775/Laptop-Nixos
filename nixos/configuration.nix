@@ -5,13 +5,18 @@
     ./hardware-configuration.nix
   ];
 
+
+  
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
 
   boot = {
+    kernelModules = [ "lenovo-legion" ];
     kernelPackages = pkgs.linuxKernel.packages.linux_6_12;
+    initrd.kernelModules = [ "nvidia" ];
+    blacklistedKernelModules = [ "nouveau" ];
     loader = {
       systemd-boot.enable = true;
       systemd-boot.configurationLimit = 5;
@@ -37,9 +42,18 @@
       };
     };
   };
+  
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false; # Use proprietary driver
+    nvidiaSettings = true;
+    package = pkgs.linuxKernel.packages.linux_6_12.nvidiaPackages.stable;
+  };
+
 
   networking = {
-    hostName = "peaches";
+    hostName = "peachy";
     networkmanager.enable = true;
   };
 
@@ -53,10 +67,10 @@
 
   environment = {
     variables = {
-      GDK_SCALE = "2";
-      GDK_DPI_SCALE = "2";
-      QT_SCALE_FACTOR = "2";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "2";
+      GDK_SCALE = "1";
+      GDK_DPI_SCALE = "1.5";
+      QT_SCALE_FACTOR = "1.5";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       XCURSOR_SIZE = "48";
       WLR_DPI = "192";
       GTK_USE_PORTAL = "1";
@@ -186,6 +200,13 @@
   programs.hyprland.enable = true;
   networking.firewall.enable = true;
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
+
+    services.libinput.touchpad = {
+    naturalScrolling = false;
+    scrollMethod = "twofinger";
+    accelSpeed = "-1.0"; # Slows down scrolling
+    accelProfile = "adaptive";
+  };
 
   system.stateVersion = "24.11";
 }
