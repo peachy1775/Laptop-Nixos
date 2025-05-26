@@ -74,8 +74,8 @@
   environment = {
     variables = {
       GDK_SCALE = "1";
-      GDK_DPI_SCALE = "1.5";
-      QT_SCALE_FACTOR = "1.5";
+      GDK_DPI_SCALE = "1";
+      QT_SCALE_FACTOR = "1";
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       XCURSOR_SIZE = "48";
       WLR_DPI = "192";
@@ -180,6 +180,7 @@
       ntfs3g
       ocl-icd
       clinfo
+      libinput
     ];
   };
 
@@ -201,15 +202,6 @@
   programs.hyprland.enable = true;
   networking.firewall.enable = true;
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
-   
-    services.xserver.libinput = {
-  enable = true;
-  touchpad = {
-    naturalScrolling = false;
-    scrollMethod = "twofinger";
-    accelSpeed = "-1.0";
-    accelProfile = "adaptive";
-  };
-};
+
   system.stateVersion = "24.11";
 }

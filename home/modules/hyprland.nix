@@ -3,7 +3,7 @@ _: {
     enable = true;
 
     settings = {
-      monitor = "DP-4,7680x2160@119.99700,auto,1.875";
+      monitor = "eDP-1,2560x1600,auto,2";
 
       # Auto-launing
       exec-once = [
@@ -39,14 +39,22 @@ _: {
       };
 
       # Inputs (keyboard & mouse)
+     
       input = {
+        scroll_factor = -1.0;
         kb_layout = "us";
         follow_mouse = 1;
-        sensitivity = 0.3;
+        sensitivity = 0.1;
         touchpad = {
           natural_scroll = false;
+          disable_while_typing = true;
+          tap-to-click = true;
+          drag_lock = false;
+          scroll_factor = 0.3;
         };
       };
+        
+      
 
       render = {
         explicit_sync = false;
@@ -107,6 +115,8 @@ _: {
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
+        "SUPER, MINUS, exec, brightnessctl set 10%-"
+        "SUPER, EQUAL, exec, brightnessctl set 10%+"
       
       ];
       bindl = [
@@ -132,4 +142,7 @@ _: {
     };
   };
   home.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  
+
 }
