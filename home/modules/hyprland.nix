@@ -42,9 +42,9 @@ _: {
       input = {
         kb_layout = "us";
         follow_mouse = 1;
-        sensitivity = 0.5;
+        sensitivity = 0.3;
         touchpad = {
-          natural_scroll = true;
+          natural_scroll = false;
         };
       };
 

@@ -35,7 +35,7 @@
         enable = true;
         wayland = true;
       };
-      videoDrivers = [ "intel" ];
+      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";
         options = "eurosign:e,caps:escape";
@@ -43,12 +43,18 @@
     };
   };
   
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false; # Use proprietary driver
-    nvidiaSettings = true;
-    package = pkgs.linuxKernel.packages.linux_6_12.nvidiaPackages.stable;
+  hardware = {
+    graphics.enable = true;
+    nvidia = {
+      open = false;
+      package = pkgs.linuxKernel.packages.linux_6_12.nvidiaPackages.stable;
+      nvidiaSettings = true;
+      modesetting.enable = true;
+      powerManagement = {
+        enable = true;
+        finegrained = false;
+      };
+    };
   };
 
 
@@ -177,12 +183,7 @@
     ];
   };
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-    ];
-  };
+
 
   fonts = {
     packages = with pkgs; [
@@ -200,13 +201,15 @@
   programs.hyprland.enable = true;
   networking.firewall.enable = true;
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
-
-    services.libinput.touchpad = {
+   
+    services.xserver.libinput = {
+  enable = true;
+  touchpad = {
     naturalScrolling = false;
     scrollMethod = "twofinger";
-    accelSpeed = "-1.0"; # Slows down scrolling
+    accelSpeed = "-1.0";
     accelProfile = "adaptive";
   };
-
+};
   system.stateVersion = "24.11";
 }
