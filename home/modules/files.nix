@@ -3,8 +3,8 @@
 
   home.file = {
     
-    ".config/nvim/lua.init" = {
-      source = ...config/nvim/lua.init;
+    ".config/nvim/init.lua" = {
+      source = ../config/nvim/init.lua;
     };
     ".config/starship.toml" = {
       source = ../config/starship.toml;
