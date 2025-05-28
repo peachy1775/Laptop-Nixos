@@ -1,22 +1,20 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    # Theme plugin
-    vimPlugins.catppuccin-nvim
-
-    # Required by Telescope and cmp
-    vimPlugins.telescope-nvim
-    vimPlugins.plenary-nvim
-    vimPlugins.nvim-cmp
-    vimPlugins.nvim-treesitter
-  ];
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+
+    plugins = with pkgs.vimPlugins; [
+      catppuccin-nvim
+      telescope-nvim
+      plenary-nvim
+      nvim-cmp
+      nvim-treesitter
+      nvim-tree-lua
+    ];
 
     extraLuaConfig = ''
       -- Basic settings
@@ -29,7 +27,7 @@
       vim.opt.mouse = "a"
       vim.g.mapleader = " "
 
-      -- Theme
+      -- Colorscheme
       require("catppuccin").setup({
         flavour = "mocha",
         integrations = {
@@ -40,14 +38,20 @@
       })
       vim.cmd.colorscheme("catppuccin")
 
-      -- Treesitter config
+      -- Treesitter
       require("nvim-treesitter.configs").setup {
         highlight = { enable = true },
         indent = { enable = true },
       }
 
-      -- Keybind example
-      vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+      -- Nvim-tree
+      require("nvim-tree").setup()
+      vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+
+      -- Telescope (Rofi-style fuzzy finder)
+      local builtin = require("telescope.builtin")
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
     '';
   };
 }
