@@ -2,10 +2,6 @@
 {
 
   home.file = {
-    
-    ".config/nvim/init.lua" = {
-      source = ../config/nvim/init.lua;
-    };
     ".config/starship.toml" = {
       source = ../config/starship.toml;
     };

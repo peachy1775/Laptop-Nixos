@@ -52,6 +52,8 @@
     xfce.thunar
     xfce.tumbler
     xfce.thunar-volman
+    neovim
+
 
     #dev-tools
     alejandra
