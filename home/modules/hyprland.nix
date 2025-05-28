@@ -12,6 +12,7 @@ _: {
         "brave &"
         "waybar &"
         "swww-daemon &"
+        "udiskie &"
         "hyprctl dispatch workspace 1"
       ];
 

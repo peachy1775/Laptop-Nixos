@@ -52,6 +52,7 @@
     xfce.thunar
     xfce.tumbler
     xfce.thunar-volman
+    nodejs
 
 
     #dev-tools
@@ -76,6 +77,7 @@
 
     #misc
     gtk3
+    gcc
 
     # Teams
     teams-for-linux
