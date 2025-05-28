@@ -28,7 +28,7 @@
       GTK_USE_PORTAL = "1";
 
     };
-    packages = with pkgs; [ ];
+    #packages = with pkgs; [ ];
   };
 
 

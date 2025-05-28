@@ -2,6 +2,10 @@
 {
 
   home.file = {
+    
+    ".config/nvim/lua.init" = {
+      source = ...config/nvim/lua.init
+    }
     ".config/starship.toml" = {
       source = ../config/starship.toml;
     };

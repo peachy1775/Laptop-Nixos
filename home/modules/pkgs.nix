@@ -25,6 +25,7 @@
     wofi
     xorg.xprop
     waypaper
+    hyprlock
 
     #audio-media
     mpv

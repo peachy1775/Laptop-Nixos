@@ -65,4 +65,3 @@ ssh-agent.env.direnv/
 result*
 home/git.nix
 ssh-agent.env
-

@@ -3,7 +3,7 @@ _: {
     enable = true;
 
     settings = {
-      monitor = "eDP-1,2560x1600,auto,2";
+      monitor = "eDP-1,2560x1600@240,auto,2";
 
       # Auto-launing
       exec-once = [
@@ -41,7 +41,6 @@ _: {
       # Inputs (keyboard & mouse)
      
       input = {
-        scroll_factor = -1.0;
         kb_layout = "us";
         follow_mouse = 1;
         sensitivity = 0.1;
@@ -50,7 +49,7 @@ _: {
           disable_while_typing = true;
           tap-to-click = true;
           drag_lock = false;
-          scroll_factor = 0.3;
+          scroll_factor = 0.1;
         };
       };
         
@@ -81,6 +80,7 @@ _: {
         "SUPER, L, exec, pavucontrol"
         "SUPER, K, exec,  blueman-manager"
         "SUPER, S, exec,  hyprshot -o /home/peaches/Screenshots -m region"
+        "SUPER, N, exec,  hyprlock & sleep 1 && systemctl suspend"
         "SUPER, 7, exec, swww img ~/Wallpaper/cartoon.jpg --transition-type  random     --transition-fps 60 --transition-duration 1.7"
         "SUPER, 8, exec, swww img ~/Wallpaper/mount.jpg --transition-type random    --transition-fps 60 --transition-duration 1.7"
         "SUPER, 9, exec, swww img ~/Wallpaper/nice.jpg --transition-type  random    --transition-fps 60 --transition-duration 1.7"
@@ -115,8 +115,8 @@ _: {
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
-        "SUPER, MINUS, exec, brightnessctl set 10%-"
-        "SUPER, EQUAL, exec, brightnessctl set 10%+"
+        "SUPER, MINUS, exec, brightnessctl set 5%-"
+        "SUPER, EQUAL, exec, brightnessctl set 5%+"
       
       ];
       bindl = [
