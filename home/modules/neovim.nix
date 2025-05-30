@@ -134,15 +134,34 @@
       -- ##################################
       -- ####       NVIM-CMP SETUP     ####
       -- ##################################
+           -- Ensure cmp is safely required
+      local ok, cmp = pcall(require, "cmp")
+      if not ok then
+        return
+      end
       
-      local cmp = require("cmp")
+      -- Set up nvim-cmp
       cmp.setup({
         mapping = cmp.mapping.preset.insert({
-          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+      
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+      
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
-        completion = {
-          autocomplete = { require("cmp.types").cmp.TriggerEvent.TextChanged },
-        },
+      
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "spell" },

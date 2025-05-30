@@ -1,98 +1,89 @@
 * {
     border: none;
     font-family: "Hack", "Font Awesome 6 Pro";
-    font-size: 15px;
-    font-weight: 400;
-    background: none;
+    font-size: 13px;
+    color: #55b6a6;
+    border-radius: 20px;
 }
+
 
 window#waybar {
-    color: #a5adcb;
+    background: rgba(0, 0, 0, 0);
 }
-
-.modules-left,
-.modules-right,
+/*-----module groups----*/
+.modules-right {
+	background-color: rgba(25, 25, 38, 0.8);
+    margin: 2px 10px 0 0;
+}
 .modules-center {
-    border-radius: 6px;
-    background: #2c0e58;
-    padding: 12px 0;
+	background-color: rgba(25, 25, 38, 0.8);
+    margin: 2px 0 0 0;
 }
-
-tooltip {
-    color: #a5adcb;
-    background-color: #2c2f57;
-    text-shadow: none;
+.modules-left {
+    margin: 2px 0 0 5px;
+	background-color: rgba(25, 25, 38, 0.8);
 }
-
-tooltip * {
-    color: #a5adcb;
-    text-shadow: none;
-}
-
-.modules-center {}
-
-#custom-sep {
-    color: #cc30da;
-    margin: 4px 0;
-}
-
-#battery,
-#workspaces,
-#clock,
-#custom-bluetooth_devices,
-#custom-powermenu,
-#pulseaudio,
-#tray {}
-
-#workspaces {
-    border-radius: 6px;
-}
-
+/*-----modules indv----*/
 #workspaces button {
-    color: #5aa4dd;
-    background: none;
-    padding: 0;
+    padding: 1px 5px;
+    background-color: transparent;
 }
-
 #workspaces button:hover {
-    color: #a6da95;
+    box-shadow: inherit;
+	background-color: rgba(85, 182, 166,1);
 }
 
-#workspaces button.active {
-    font-weight: 600;
-    color: #f5bde6;
-}
-
-#battery {
-    color: #099923;
-}
-
-#temperature {
-    color: #eed49f;
+#workspaces button.focused {
+	background-color: rgba(85, 182, 166,0.85);
 }
 
 #clock {
-    font-weight: 600;
-    color: #8bd5ca;
+    color: #55b6a6;
 }
-
-#bluetooth {
-    color: #8aadf4;
+#battery {
+    color: #55b6a6;
 }
-
-#pulseaudio {
-    color: #a6da95;
-}
-
-#pulseaudio.muted {
-    color: #ed8796;
-}
-
 #memory {
-    color: #ed8796;
+    color: #55b6a6;
+} 
+#temperature {
+    color: #55b6a6;
+}
+#network {
+    color: #55b6a6;
+}
+#pulseaudio {
+    color: #55b6a6;
+}
+#tray,
+#custom-sep {
+    color: rgba(47, 83, 144, 0.73);
+    margin: 4px 0;
 }
 
-#custom-powermenu {
-    margin: 12px 0 0 0;
-    color: #6e738d;
+/*-----Indicators----*/
+/*#idle_inhibitor.activated {
+    color: #2dcc36;
 }
+#pulseaudio.muted {
+    color: #cc3436;
+}
+#battery.charging {
+    color: #2dcc36;
+}
+#battery.warning:not(.charging) {
+	color: #e6e600;
+}
+#battery.critical:not(.charging) {
+    color: #cc3436;
+}
+#temperature.critical {
+    color: #cc3436;
+}*/
+/*-----Colors----*/
+/*
+ *rgba(0,85,102,1),#005566 --> Indigo(dye)
+ *rgba(0,43,51,1),#002B33 --> Dark Green 
+ *rgba(0,153,153,1),#009999 --> Persian Green 
+ *
+ */
