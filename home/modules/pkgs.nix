@@ -81,7 +81,6 @@
 
     # Teams
     teams-for-linux
-
   ];
 
 }

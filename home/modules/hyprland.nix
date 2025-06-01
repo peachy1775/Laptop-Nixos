@@ -9,19 +9,22 @@ _: {
       exec-once = [
         "hyprctl dispatch workspace 1"
         "ghostty &"
-        "brave &"
         "waybar &"
         "swww-daemon &"
         "udiskie &"
         "hyprctl dispatch workspace 1"
       ];
 
+      misc = {
+        middle_click_paste = false;
+      };
+
       # General settings
       general = {
         gaps_in = 0;
         gaps_out = 0;
         border_size = 4;
-        "col.active_border" = "rgb(3d85c6)";
+        "col.active_border" = "rgb(1e1e2e)";
         "col.inactive_border" = "rgba(00000000)";
       };
 
@@ -51,9 +54,18 @@ _: {
           tap-to-click = true;
           drag_lock = false;
           scroll_factor = 0.1;
+          };
         };
+
+      
+      wayland.windowManager.hyprland.settings = {
+        windowrulev2 = [
+        "workspace 1 silent, class:^(com.mitchellh.ghostty)$"
+        "workspace 2 silent, class:^(Brave-browser)$"
+        "workspace 3 silent, class:^(Code)$"
+        "workspace 4 silent, class:^(teams-for-linux)$"
+        ];
       };
-        
       
 
       render = {
@@ -116,8 +128,9 @@ _: {
         "SUPER, right, movefocus, r"
         "SUPER, up, movefocus, u"
         "SUPER, down, movefocus, d"
-        "SUPER, MINUS, exec, brightnessctl set 5%-"
-        "SUPER, EQUAL, exec, brightnessctl set 5%+"
+        "SUPER, MINUS, exec, brightnessctl set 10%-"
+        "SUPER, EQUAL, exec, brightnessctl set 10%+"
+        ", mouse:274, exec,"
       
       ];
       bindl = [

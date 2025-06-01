@@ -1,7 +1,7 @@
 {
-  "modules-left": ["clock", "custom/sep", "network", "custom/sep", "tray"],
+  "modules-left": ["custom/sep", "memory", "custom/sep", "battery", "custom/sep", "temperature", "custom/sep", "pulseaudio", "custom/sep"],
   "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["memory", "custom/sep", "pulseaudio", "custom/sep", "battery", "custom/sep", "temperature"],
+  "modules-right": ["custom/sep", "tray","custom/sep","bluetooth", "custom/sep", "network", "custom/sep", "clock", "custom/sep"],
 
   "custom/sep": {
     "format": " "
@@ -15,11 +15,11 @@
   },
 
   "network": {
-    "format-wifi": "({signalStrength}%)  ",
+    "format-wifi": "   ({signalStrength}%) ",
     "format-ethernet": "{ifname}  ",
     "format-disconnected": " ",
     "max-length": 50,
-    "on-click": "ghostty -e 'nmtui'"
+    "on-click": "ghostty -e nmtui"
   },
 
   "memory": {
@@ -42,12 +42,12 @@
       "5": []
     },
     "format-icons": {
-      "1": "",
-      "2": "",
-      "3": "",
-      "4": "/󰊻",
-      "5": "",
-      "active": ""
+      "1": "  ",
+      "2": "  ",
+      "3": "  ",
+      "4": " 󰭻 ",
+      "5": "  ",
+      "active": "  "
     }
   },
 
@@ -62,27 +62,16 @@
     "on-click": "gnome-calendar"
   },
 
-  "pulseaudio": {
-    "format": "{volume}% {icon} ",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": "0% {icon} ",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "pavucontrol"
-  },
+"pulseaudio": {
+  "format": " {volume}%",
+  "format-muted": " 0%",
+  "format-source": "{volume}% ",
+  "format-source-muted": "",
+  "on-click": "pavucontrol"
+},
 
   "bluetooth": {
-    "format": "",
+    "format": "  ",
     "justify": "center",
     "interval": 5,
     "on-click": "blueman-manager",
@@ -90,11 +79,13 @@
   },
 
   "battery": {
-    "bat": "BAT0",
-    "interval": 60,
-    "states": {
-      "warning": 30,
-      "critical": 15
-    }
-  }
+  "bat": "BAT0",
+  "interval": 60,
+  "states": {
+    "warning": 25,
+    "critical": 10
+  },
+  "format": " 󰁹 {capacity}%"
+}
+
 }

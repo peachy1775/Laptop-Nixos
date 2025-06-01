@@ -7,17 +7,12 @@
     viAlias = true;
     vimAlias = true;
 
-    ##################################
-    ####       PLUGINS BLOCK      ####
-    ##################################
-    
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
       telescope-nvim
       plenary-nvim
       nvim-cmp
       cmp-nvim-lsp
-      cmp-spell
       nvim-treesitter
       nvim-tree-lua
       lualine-nvim
@@ -29,16 +24,17 @@
       harpoon
       nvim-surround
       vim-illuminate
+      which-key-nvim
+      bufferline-nvim
+      nvim-web-devicons
     ];
 
     extraLuaConfig = ''
       -- ##################################
       -- ####   CORE EDITOR OPTIONS    ####
       -- ##################################
-      
+
       vim.opt.clipboard = "unnamedplus"
-      vim.opt.spell = true
-      vim.opt.spelllang = { "en_us" }
       vim.opt.number = true
       vim.opt.relativenumber = true
       vim.opt.expandtab = true
@@ -50,9 +46,15 @@
       vim.g.mapleader = " "
 
       -- ##################################
-      -- ####        THEME SETUP       ####
+      -- ####        WHICH-KEY         ####
       -- ##################################
       
+      require("which-key").setup()
+
+      -- ##################################
+      -- ####        THEME SETUP       ####
+      -- ##################################
+
       require("catppuccin").setup({
         flavour = "mocha",
         integrations = {
@@ -63,18 +65,26 @@
       })
       vim.cmd.colorscheme("catppuccin")
 
-     -- ##################################
-     -- ####        LUALINE SETUP     ####
-     -- ##################################
-      
+      -- ##################################
+      -- ####        LUALINE SETUP     ####
+      -- ##################################
+
       require("lualine").setup({
         options = { theme = "catppuccin" }
       })
 
       -- ##################################
+      -- ####     BUFFERLINE SETUP     ####
+      -- ##################################
+
+      require("bufferline").setup({})
+      vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+      vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+
+      -- ##################################
       -- ####    TREESITTER CONFIG     ####
       -- ##################################
-      
+
       require("nvim-treesitter.configs").setup({
         highlight = { enable = true },
         indent = { enable = true },
@@ -83,7 +93,7 @@
       -- ##################################
       -- ####     NVIM-TREE SETUP      ####
       -- ##################################
-      
+
       require("nvim-tree").setup({
         actions = {
           open_file = {
@@ -106,22 +116,24 @@
       -- ##################################
       -- ####     TELESCOPE CONFIG     ####
       -- ##################################
-      
+
       local builtin = require("telescope.builtin")
-      vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-      vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+
+      vim.keymap.set("n", "<leader>ff", function()
+        builtin.find_files({ hidden = true })
+      end, {})
 
       -- ##################################
       -- ####     TOGGLETERM CONFIG     ####
       -- ##################################
-      
+
       require("toggleterm").setup()
       vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
       -- ##################################
       -- ####    MASON & LSP CONFIG    ####
       -- ##################################
-      
+
       require("mason").setup()
       require("mason-lspconfig").setup({
         automatic_installation = false,
@@ -134,13 +146,10 @@
       -- ##################################
       -- ####       NVIM-CMP SETUP     ####
       -- ##################################
-           -- Ensure cmp is safely required
+
       local ok, cmp = pcall(require, "cmp")
-      if not ok then
-        return
-      end
-      
-      -- Set up nvim-cmp
+      if not ok then return end
+
       cmp.setup({
         mapping = cmp.mapping.preset.insert({
           ["<Tab>"] = cmp.mapping(function(fallback)
@@ -150,7 +159,7 @@
               fallback()
             end
           end, { "i", "s" }),
-      
+
           ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
@@ -158,10 +167,10 @@
               fallback()
             end
           end, { "i", "s" }),
-      
+
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
-      
+
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "spell" },
@@ -171,7 +180,7 @@
       -- ##################################
       -- ####      AUTOPAIRS CONFIG    ####
       -- ##################################
-      
+
       require("nvim-autopairs").setup({ check_ts = true })
       vim.keymap.set("i", "<C-l>", function()
         local col = vim.fn.col(".")
@@ -186,19 +195,19 @@
       -- ##################################
       -- ####    FAST ESC & BINDINGS   ####
       -- ##################################
-      
+
       vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
 
       -- ##################################
       -- ####    NVIM-SURROUND SETUP   ####  
       -- ##################################
-      
+
       require("nvim-surround").setup()
 
       -- ##################################
       -- #### ILLUMINATE HIGHLIGHTING  ####
       -- ##################################
-      
+
       require("illuminate").configure({})
 
       vim.api.nvim_create_autocmd("CursorHold", {
@@ -217,7 +226,7 @@
       -- ##################################
       -- ####    FORMAT ON SAVE BLOCK  ####
       -- ##################################
-      
+
       vim.api.nvim_create_autocmd("BufWritePre", {
         callback = function()
           vim.lsp.buf.format({ async = false })

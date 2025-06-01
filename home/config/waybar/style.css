@@ -1,8 +1,7 @@
 * {
     border: none;
-    font-family: "Hack", "Font Awesome 6 Pro";
+    font-family: "Hack", "Font Awesome 6 Pro", "JetBrainsMono Nerd Font";
     font-size: 13px;
-    color: #55b6a6;
     border-radius: 20px;
 }
 
@@ -11,17 +10,27 @@ window#waybar {
     background: rgba(0, 0, 0, 0);
 }
 /*-----module groups----*/
+
+#workspaces button {
+  color: #8aadf4; /* default color */
+  background: transparent;
+  border: none;
+}
+
+#workspaces button.active {
+  color: #f0c6c6; /* your desired color for the active workspace */
+}
 .modules-right {
-	background-color: rgba(25, 25, 38, 0.8);
+	background-color: rgba(30, 30, 46, 0.8);
     margin: 2px 10px 0 0;
 }
 .modules-center {
-	background-color: rgba(25, 25, 38, 0.8);
+	background-color: rgba(30, 30, 46, 0.8);
     margin: 2px 0 0 0;
 }
 .modules-left {
     margin: 2px 0 0 5px;
-	background-color: rgba(25, 25, 38, 0.8);
+	background-color: rgba(30, 30, 46, 0.8);
 }
 /*-----modules indv----*/
 #workspaces button {
@@ -38,22 +47,26 @@ window#waybar {
 }
 
 #clock {
-    color: #55b6a6;
+    color: #8087a2;
+}
+#bluetooth {
+    color: #eba0ac;
 }
 #battery {
-    color: #55b6a6;
+    color: #85c1dc;
 }
 #memory {
-    color: #55b6a6;
+    color: #b4befe;
 } 
 #temperature {
-    color: #55b6a6;
+    color: #ea76cb;
 }
+
 #network {
-    color: #55b6a6;
+    color: #fab387;
 }
 #pulseaudio {
-    color: #55b6a6;
+    color: #dc8a78;
 }
 #tray,
 #custom-sep {
