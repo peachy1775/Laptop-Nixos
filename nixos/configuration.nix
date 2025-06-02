@@ -118,6 +118,14 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   services.pulseaudio.enable = false;
+  services.dbus.enable = true;
+  hardware.bluetooth.settings = {
+  General = {
+    AutoEnable = true;
+    FastConnectable = true;
+  };
+};
+
 
   # Input and Display
   xdg.portal = {
@@ -147,6 +155,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
 
   # Creates Group libvirt to usb inside QEMU
@@ -181,6 +190,8 @@
       ocl-icd
       clinfo
       libinput
+      bluez
+      bluez-tools
     ];
   };
 

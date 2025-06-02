@@ -20,6 +20,7 @@ def pic [...args] { imv $args.0 }
 alias d = cd
 alias clr = clear
 alias y = yazi
+alias usb = yazi /run/media/peaches
 
 # Still works as a regular alias since it's a fixed command
 alias nfs = sudo nixos-rebuild switch --flake .#peaches
@@ -35,11 +36,22 @@ export def nixos-rbld [] {
 }
 
 export def dev [] {
-  nix develop --command nu
+  nix develop ~/dev
 }
 
+def force-quit [] {
+  let pids = (run sh -c $"ps --ppid $nu.env.PID -o pid=" | lines)
+  $pids | each { |pid| run kill -9 $pid }
+  exit
+}
+
+def e [] {
+  exit
+}
 
 # Load zoxide commands
 source ~/.config/nushell/zoxide.nu
+
+
 
 

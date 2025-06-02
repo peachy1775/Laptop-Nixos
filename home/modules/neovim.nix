@@ -197,6 +197,7 @@
       -- ##################################
 
       vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
+      vim.keymap.set("i", "<A-o>", "<C-o>", { noremap = true })
 
       -- ##################################
       -- ####    NVIM-SURROUND SETUP   ####  
