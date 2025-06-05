@@ -2,14 +2,11 @@ _: {
   programs.fastfetch = {
     enable = true;
     settings = {
-      logo.source = "~/.config/fastfetch/finger.txt";
-      logo.width = 35;
+      logo.source = "~/.config/fastfetch/lover.png";
+      logo.width = 15;
+      logo.height = 12;
       display.separator = " ";
       modules = [
-        {
-          type = "custom";
-          format = "╭─────────────────────────────────────────────────────╮";
-        }
         {
           type = "os";
           key = "    OS:";
@@ -56,18 +53,10 @@ _: {
           key = "    Local IP:";
           keyColor = "yellow";
         }
-        {
-          type = "custom";
-          format = "╰─────────────────────────────────────────────────────╯";
-        }
         "break"
         {
           type = "title";
           key = "  :";
-        }
-        {
-          type = "custom";
-          format = "╭─────────────────────────────────────────────────────╮";
         }
         {
           type = "cpu";
@@ -96,11 +85,6 @@ _: {
           type = "disk";
           key = "  󰋊  Disk:";
           keyColor = "green";
-        }
-        {
-          type = "custom";
-          key = " ";
-          format = "╰─────────────────────────────────────────────────────╯";
         }
       ];
     };
