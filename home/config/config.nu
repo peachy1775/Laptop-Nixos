@@ -3,7 +3,7 @@ $env.config.use_kitty_protocol = true;
 $env.config.buffer_editor = "code";
 $env.editor = "code";
 
-screenfetch
+fastfetch
 
 # ENV's
 $env.XDG_CONFIG_DIRS = $"($env.XDG_CONFIG_DIRS):($env.HOME)/.config"

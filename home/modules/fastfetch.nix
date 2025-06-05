@@ -2,7 +2,7 @@ _: {
   programs.fastfetch = {
     enable = true;
     settings = {
-      logo.source = "~/.config/fastfetch/nixos.png";
+      logo.source = "~/.config/fastfetch/finger.txt";
       logo.width = 35;
       display.separator = " ";
       modules = [

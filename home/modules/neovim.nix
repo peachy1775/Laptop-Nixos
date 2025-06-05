@@ -63,6 +63,7 @@
           cmp = true,
         },
       })
+      vim.o.background = ("dark")
       vim.cmd.colorscheme("catppuccin")
 
       -- ##################################
@@ -198,6 +199,8 @@
 
       vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
       vim.keymap.set("i", "<A-o>", "<C-o>", { noremap = true })
+      vim.keymap.set("n", "<leader>?", "<cmd>WhichKey<CR>", { noremap = true, silent = true, desc = "Show keymaps" })
+
 
       -- ##################################
       -- ####    NVIM-SURROUND SETUP   ####  
