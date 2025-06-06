@@ -2,8 +2,8 @@ _: {
   programs.fastfetch = {
     enable = true;
     settings = {
-      logo.source = "~/.config/fastfetch/lover.png";
-      logo.width = 15;
+      logo.source = "~/.config/fastfetch/nixos.png";
+      logo.width = 30;
       logo.height = 12;
       display.separator = " ";
       modules = [
