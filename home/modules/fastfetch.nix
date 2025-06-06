@@ -3,7 +3,7 @@ _: {
     enable = true;
     settings = {
       logo.source = "~/.config/fastfetch/nixos.png";
-      logo.width = 30;
+      logo.width = 20;
       logo.height = 12;
       display.separator = " ";
       modules = [
