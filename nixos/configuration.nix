@@ -29,12 +29,12 @@
   services = {
     qemuGuest.enable = true;
     spice-vdagentd.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+      };
     xserver = {
       enable = true;
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
-      };
       videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "us";

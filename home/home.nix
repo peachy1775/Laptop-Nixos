@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ username, ... }:
 
 {
   imports = [
@@ -12,7 +12,6 @@
     ./modules/programs.nix
     ./modules/files.nix
   ];
-
   home = {
     inherit username;
     homeDirectory = "/home/peaches";

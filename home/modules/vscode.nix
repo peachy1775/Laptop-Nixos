@@ -48,6 +48,8 @@
           "[c]" = {
             "editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
           };
+          nix.enableLanguageServer = true;
+          nix.serverPath = "${pkgs.nixd}/bin/nixd";
         };
       };
     };

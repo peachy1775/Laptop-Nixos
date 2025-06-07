@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   programs.ghostty = {
     enable = true;
@@ -7,6 +6,9 @@
       theme = "catppuccin-mocha";
       background-opacity = 0.8;
       background-blur = true;
+      
+    "terminal.confirm-close-running-process" = false;
+
     };
   };
 }

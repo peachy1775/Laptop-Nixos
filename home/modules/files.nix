@@ -2,7 +2,10 @@
 {
 
   home.file = {
-    ".config/starship.toml" = {
+      ".config/ghostty/config.toml" = {
+      source =  ../config/ghostty/config.toml;
+    };
+  ".config/starship.toml" = {
       source = ../config/starship.toml;
     };
     ".config/fastfetch/nixos.png" = {

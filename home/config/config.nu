@@ -40,9 +40,10 @@ export def dev [] {
 }
 
 def force-quit [] {
-  let pids = (run sh -c $"ps --ppid $nu.env.PID -o pid=" | lines)
-  $pids | each { |pid| run kill -9 $pid }
-  exit
+  let self_pid = $nu.env.PID
+  let children = (run sh -c $"ps --ppid ($self_pid) -o pid=" | lines)
+  $children | each {|pid| run kill -9 $pid }
+  run kill -9 $self_pid
 }
 
 def e [] {

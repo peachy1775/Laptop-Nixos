@@ -18,8 +18,6 @@
       lualine-nvim
       toggleterm-nvim
       nvim-lspconfig
-      mason-nvim
-      mason-lspconfig-nvim
       nvim-autopairs
       harpoon
       nvim-surround
@@ -27,6 +25,7 @@
       which-key-nvim
       bufferline-nvim
       nvim-web-devicons
+      trouble-nvim
     ];
 
     extraLuaConfig = ''
@@ -34,6 +33,7 @@
       -- ####   CORE EDITOR OPTIONS    ####
       -- ##################################
 
+      vim.g.mapleader=" "
       vim.opt.clipboard = "unnamedplus"
       vim.opt.number = true
       vim.opt.relativenumber = true
@@ -43,7 +43,9 @@
       vim.opt.termguicolors = true
       vim.opt.mouse = "a"
       vim.opt.timeoutlen = 250
-      vim.g.mapleader = " "
+      vim.opt.textwidth = 80
+      vim.opt.formatoptions = "tcqj"
+      
 
       -- ##################################
       -- ####        WHICH-KEY         ####
@@ -132,17 +134,17 @@
       vim.keymap.set("n", "<leader>t", ":ToggleTerm<CR>", { noremap = true, silent = true })
 
       -- ##################################
-      -- ####    MASON & LSP CONFIG    ####
+      -- ####    LSP CONFIG            ####
       -- ##################################
 
-      require("mason").setup()
-      require("mason-lspconfig").setup({
-        automatic_installation = false,
-      })
+      require("trouble").setup()
 
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       lspconfig.pyright.setup({ capabilities = capabilities })
+
+      vim.lsp.enable("nixd")
+      vim.lsp.inlay_hint.enable()
 
       -- ##################################
       -- ####       NVIM-CMP SETUP     ####
