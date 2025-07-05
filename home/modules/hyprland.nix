@@ -63,7 +63,8 @@ _: {
         "workspace 1 silent, class:^(com.mitchellh.ghostty)$"
         "workspace 2 silent, class:^(Brave-browser)$"
         "workspace 3 silent, class:^(Code)$"
-        "workspace 4 silent, class:^(teams-for-linux)$"
+        "workspace 4 silent, class:^(libreoffice-startcenter)$"
+        "workspace 5 silent, class:^(teams-for-linux)$"
         ];
       };
       
@@ -90,10 +91,11 @@ _: {
         "SUPER, M, exec, proton-mail"
         "SUPER, T, exec, teams-for-linux"
         "SUPER, V, exec, virt-manager"
-        "SUPER, L, exec, pavucontrol"
+        "SUPER, L, exec, libreoffice"
         "SUPER, K, exec,  blueman-manager"
         "SUPER, S, exec,  hyprshot -o /home/peaches/Screenshots -m region"
         "SUPER, N, exec,  hyprlock & sleep 1 && systemctl suspend"
+        "SUPER, O, exec, libreoffice"
         "SUPER, 7, exec, swww img ~/Wallpaper/color.png --transition-type  random     --transition-fps 60 --transition-duration 1.7"
         "SUPER, 8, exec, swww img ~/Wallpaper/Foff.jpg --transition-type random    --transition-fps 60 --transition-duration 1.7"
         "SUPER, 9, exec, swww img ~/Wallpaper/moon.jpg --transition-type  random    --transition-fps 60 --transition-duration 1.7"

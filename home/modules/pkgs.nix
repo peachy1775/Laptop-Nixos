@@ -11,6 +11,7 @@
     pipes
     screenfetch
     sl
+    viu
 
     #browsers
     brave
@@ -47,6 +48,7 @@
     wget
     zsh
     bottom
+    libinput
 
     #file-managers
     xfce.thunar
@@ -81,6 +83,9 @@
 
     # Teams
     teams-for-linux
+
+    # Documents
+    libreoffice
   ];
 
 }

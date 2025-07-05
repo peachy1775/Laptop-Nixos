@@ -15,11 +15,11 @@
   },
 
   "network": {
-    "format-wifi": "   ({signalStrength}%) ",
+    "format-wifi": "   ({essid}) ",
     "format-ethernet": "{ifname}  ",
     "format-disconnected": " ",
     "max-length": 50,
-    "on-click": "ghostty -e nmtui"
+    "on-click": "nm-applet"
   },
 
   "memory": {
@@ -42,12 +42,11 @@
       "5": []
     },
     "format-icons": {
-      "1": "  ",
-      "2": "  ",
-      "3": "  ",
-      "4": " 󰭻 ",
-      "5": "  ",
-      "active": "  "
+      "1": "~/CLI",
+      "2": "1/Brave",
+      "3": "2/VIM",
+      "4": "3/LIBRE",
+      "5": "4/CHAT"
     }
   },
 

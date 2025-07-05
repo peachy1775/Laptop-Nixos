@@ -24,6 +24,11 @@
     };
   };
 
+  boot.extraModprobeConfig = ''
+  options snd-hda-intel model=auto
+  blacklist snd_soc_avs
+'';
+
   security.polkit.enable = true;
 
   services = {
@@ -36,6 +41,7 @@
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
+      libinput.touchpad.disableWhileTyping = true;
       xkb = {
         layout = "us";
         options = "eurosign:e,caps:escape";
@@ -57,15 +63,19 @@
     };
   };
 
+  services.udev.extraRules = ''
+    ACTION=="add|change", ATTRS{name}=="Touchpad", ENV{LIBINPUT_DISABLE_WHILE_TYPING}="1"
+  '';
+
 
   networking = {
     hostName = "peachy";
     networkmanager.enable = true;
   };
 
-  time.timeZone = "America/Chicago";
+  #time.timeZone = "America/Denver";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "America/Chicago";
 
   services.getty.autologinUser = "peaches";
 
@@ -192,6 +202,7 @@
       libinput
       bluez
       bluez-tools
+      networkmanagerapplet
     ];
   };
 
@@ -213,6 +224,7 @@
   programs.hyprland.enable = true;
   networking.firewall.enable = true;
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
+  programs.niri.enable = true;
 
   system.stateVersion = "24.11";
 }

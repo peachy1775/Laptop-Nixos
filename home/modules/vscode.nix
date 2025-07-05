@@ -18,26 +18,30 @@
           vscode-icons-team.vscode-icons
           jnoortheen.nix-ide
           catppuccin.catppuccin-vsc
+          formulahendry.code-runner
         ];
 
         userSettings = {
+          # Theme and UI
           "workbench.colorTheme" = "Catppuccin Mocha";
-          "telemetry.enableTelemetry" = false;
-          "telemetry.enableCrashReporter" = false;
-          "telemetry.telemetryLevel" = "off";
           "explorer.compactFolders" = false;
           "editor.wordWrap" = "on";
           "editor.formatOnSave" = true;
-
-          # Auto Save and Minimap
           "files.autoSave" = "onWindowChange";
           "editor.minimap.enabled" = false;
 
-          # Nix formatting with nil
+          # Privacy
+          "telemetry.enableTelemetry" = false;
+          "telemetry.enableCrashReporter" = false;
+          "telemetry.telemetryLevel" = "off";
+
+          # Language-specific formatters
           "[nix]" = {
             "editor.defaultFormatter" = "unknown.formatter.nil";
           };
           "nix.formatterPath" = "nil";
+          "nix.enableLanguageServer" = true;
+          "nix.serverPath" = "${pkgs.nixd}/bin/nixd";
 
           "[python]" = {
             "editor.defaultFormatter" = "ms-python.black-formatter";
@@ -48,10 +52,18 @@
           "[c]" = {
             "editor.defaultFormatter" = "llvm-vs-code-extensions.vscode-clangd";
           };
-          nix.enableLanguageServer = true;
-          nix.serverPath = "${pkgs.nixd}/bin/nixd";
+
+          # Python config
+          "python.defaultInterpreterPath" = "${pkgs.python3}/bin/python3";
+          "python.terminal.activateEnvironment" = true;
+          "python.analysis.typeCheckingMode" = "basic";
+
+          # Code Runner settings
+          "code-runner.executorMap.python" = "${pkgs.python3}/bin/python3";
+          "code-runner.runInTerminal" = true;
         };
       };
     };
   };
 }
+
