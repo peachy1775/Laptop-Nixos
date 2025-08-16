@@ -49,6 +49,8 @@
     zsh
     bottom
     libinput
+    fuzzel    
+
 
     #file-managers
     xfce.thunar

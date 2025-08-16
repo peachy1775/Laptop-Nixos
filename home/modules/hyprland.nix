@@ -46,6 +46,7 @@ _: {
      
       input = {
         kb_layout = "us";
+        kb_options = "caps:escape";
         follow_mouse = 1;
         sensitivity = 0.1;
         touchpad = {
@@ -63,15 +64,12 @@ _: {
         "workspace 1 silent, class:^(com.mitchellh.ghostty)$"
         "workspace 2 silent, class:^(Brave-browser)$"
         "workspace 3 silent, class:^(Code)$"
+        "workspace 3 silent, class:^(kitty)$"
         "workspace 4 silent, class:^(libreoffice-startcenter)$"
         "workspace 5 silent, class:^(teams-for-linux)$"
         ];
       };
       
-
-      render = {
-        explicit_sync = false;
-      };
 
       dwindle = {
         pseudotile = true;
@@ -84,18 +82,19 @@ _: {
         "SUPER, Z, exec, code"
         "SUPER, D, exec, vesktop"
         "SUPER, F, exec, thunar"
-        "SUPER, Space, exec, wofi --show drun"
         "SUPER, B, exec, brave"
-        "SUPER, C, killactive"
         "SUPER, P, exec, proton-pass"
         "SUPER, M, exec, proton-mail"
         "SUPER, T, exec, teams-for-linux"
         "SUPER, V, exec, virt-manager"
         "SUPER, L, exec, libreoffice"
-        "SUPER, K, exec,  blueman-manager"
-        "SUPER, S, exec,  hyprshot -o /home/peaches/Screenshots -m region"
-        "SUPER, N, exec,  hyprlock & sleep 1 && systemctl suspend"
-        "SUPER, O, exec, libreoffice"
+        "SUPER, K, exec, blueman-manager"
+        "SUPER, S, exec, hyprshot -o /home/peaches/Screenshots -m region"
+        "SUPER, N, exec, hyprlock & sleep 1 && systemctl suspend"
+        "SUPER, O, exec,  kitty"
+        "SUPER, C, killactive"
+        "SUPER, Space, exec, wofi --show drun"
+        "SUPER, 6, exec, swww img ~/Wallpaper/Parrot.jpg --transition-type random  --transition-fps 60 --transition-duration 1.7"
         "SUPER, 7, exec, swww img ~/Wallpaper/color.png --transition-type  random     --transition-fps 60 --transition-duration 1.7"
         "SUPER, 8, exec, swww img ~/Wallpaper/Foff.jpg --transition-type random    --transition-fps 60 --transition-duration 1.7"
         "SUPER, 9, exec, swww img ~/Wallpaper/moon.jpg --transition-type  random    --transition-fps 60 --transition-duration 1.7"
@@ -114,10 +113,6 @@ _: {
         "SUPER SHIFT, 3, movetoworkspace, 4"
         "SUPER, 4, workspace, 5"
         "SUPER SHIFT, 4, movetoworkspace, 5"
-        "SUPER, 5, workspace, 6"
-        "SUPER SHIFT, 5, movetoworkspace, 6"
-        "SUPER, 6, workspace, 7"
-        "SUPER SHIFT, 6, movetoworkspace, 7"
         "SUPER, mouse_up, workspace, e+1"
         "SUPER, mouse_down, workspace, e-1"
         ", mouse:275, workspace, e+1"

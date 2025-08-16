@@ -8,9 +8,8 @@ fastfetch
 # ENV's
 $env.XDG_CONFIG_DIRS = $"($env.XDG_CONFIG_DIRS):($env.HOME)/.config"
 
-# Custom commands instead of aliases with args
-def nv [...args] { nvim $args.0 }
-def ncim [...args] { nvim $args.0 }
+# Custom commands instead of aliases
+
 def gc [...args] { git clone $args.0 }
 def v [...args] { code $args.0 }
 def pic [...args] { imv $args.0 }
@@ -21,17 +20,19 @@ alias d = cd
 alias clr = clear
 alias y = yazi
 alias usb = yazi /run/media/peaches
+alias vi = nvim
+alias ncim = nvim
+alias vim = nvim
+alias nv = nvim
 
 # Still works as a regular alias since it's a fixed command
 alias nfs = sudo nixos-rebuild switch --flake .#peaches
-alias nfu = sudo nixos-rebuild switch --flake .#peaches --update
 
-export def nixos-rbld [] {
-  let currDir = $"(pwd)"
-  rm -rf $"($env.HOME)/.gtkrc-2.0"
-  cd $"($env.HOME)/.nix"
+export def nfu [] {
+  let currDir = (pwd)
+  cd $"($env.HOME)/.dotfiles"
   sudo nix flake update
-  sudo nixos-rebuild switch --flake $".#((open config.toml).user.username)" --impure
+  sudo nixos-rebuild switch --flake .#peaches
   cd $currDir
 }
 

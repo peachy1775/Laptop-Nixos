@@ -44,7 +44,7 @@
       libinput.touchpad.disableWhileTyping = true;
       xkb = {
         layout = "us";
-        options = "eurosign:e,caps:escape";
+        options = "caps:escape";
       };
     };
   };
@@ -158,6 +158,7 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+
   # Audio
   services.pipewire = {
     enable = true;
@@ -203,6 +204,8 @@
       bluez
       bluez-tools
       networkmanagerapplet
+      kitty
+      alacritty
     ];
   };
 

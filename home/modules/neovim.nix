@@ -42,9 +42,13 @@
       vim.opt.tabstop = 2
       vim.opt.termguicolors = true
       vim.opt.mouse = "a"
-      vim.opt.timeoutlen = 250
+      vim.opt.timeoutlen = 0
       vim.opt.textwidth = 80
       vim.opt.formatoptions = "tcqj"
+
+      -- Set same vertical bar cursor for all modes
+      vim.opt.guicursor = "n-v-c-i-ci-ve-r-cr-o:ver25"
+
       
 
       -- ##################################
