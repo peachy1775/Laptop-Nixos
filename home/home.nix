@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./modules/hyprland.nix
+    # ./modules/hyprland.nix
     ./modules/stylixTargets.nix
     ./modules/fastfetch.nix
     ./modules/vscode.nix
@@ -21,9 +21,9 @@
       EDITOR = "nvim";
       GIT_EDITOR = "nvim";
 
-      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_CURRENT_DESKTOP = "KDE";
       XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "Hyprland";
+      XDG_SESSION_DESKTOP = "KDE";
       GTK_USE_PORTAL = "1";
 
     };
