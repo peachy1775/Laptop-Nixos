@@ -230,5 +230,5 @@
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
   programs.niri.enable = true;
 
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.05";
 }
