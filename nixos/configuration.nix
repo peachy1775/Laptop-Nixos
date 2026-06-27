@@ -90,8 +90,8 @@
       XCURSOR_SIZE = "48";
       WLR_DPI = "192";
       GTK_USE_PORTAL = "1";
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_DESKTOP = "Hyprland";
+      XDG_CURRENT_DESKTOP = "KDE";
+      XDG_SESSION_DESKTOP = "KDE";
       XDG_SESSION_TYPE = "wayland";
     };
   };
@@ -143,7 +143,7 @@
     wlr.enable = true;
     config.common.default = "*";
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-kde
       xdg-desktop-portal-gtk
     ];
   };
@@ -184,14 +184,15 @@
     ];
 
     packages = with pkgs; [
-      hyprland
+      # hyprland
       pipewire
       pulseaudio
       qemu
       virt-manager
       wayland
       wireplumber
-      xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-hyprland
+      xdg-desktop-portal-kde
       gvfs
       usbutils
       udiskie
@@ -224,7 +225,7 @@
     fontconfig.defaultFonts.monospace = [ "JetBrainsMono" ];
   };
 
-  programs.hyprland.enable = true;
+  # programs.hyprland.enable = true;
   networking.firewall.enable = true;
   environment.etc."sbin/mount.ntfs".source = "${pkgs.ntfs3g}/bin/ntfs-3g";
   programs.niri.enable = true;
